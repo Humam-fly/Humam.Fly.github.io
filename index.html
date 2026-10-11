@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" class="is-loading">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Humam Flayyes — Video Editor · Motion · VFX</title>
+  <meta name="description" content="Humam Flayyes (هُمام فليّس) — video editor, motion designer and VFX artist. Selected work, reels and VFX breakdowns.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Humam Flayyes — Video Editor · Motion · VFX">
+  <meta property="og:description" content="Editing, motion graphics and VFX. Arabic & English content.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ff3b1f'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;600&family=Noto+Kufi+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__meta mono">
+      <span>HF_PORTFOLIO.prproj</span>
+      <span>SEQ 01 · 25 FPS</span>
+    </div>
+    <div class="loader__tc mono" data-loader-tc>00:00:00:00</div>
+    <div class="loader__bar"><span data-loader-bar></span></div>
+    <div class="loader__meta mono">
+      <span>RENDERING PREVIEW</span>
+      <span data-loader-pct>0%</span>
+    </div>
+  </div>
+  <div class="flash" aria-hidden="true"></div>
+
+  <!-- ============ OVERLAYS ============ -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label">PLAY</span></div>
+
+  <!-- Letterbox bars double as the HUD / nav -->
+  <header class="bar bar--top">
+    <a href="#top" class="bar__brand mono" data-magnetic>HF<span class="rec"></span></a>
+    <span class="bar__file mono hide-sm">HUMAM_FLAYYES_v26.prproj</span>
+    <span class="bar__tc mono" aria-hidden="true"><span class="rec-label">REC</span> <span data-live-tc>00:00:00:00</span></span>
+  </header>
+  <nav class="bar bar--bottom" aria-label="Sections">
+    <span class="bar__seq mono" data-seq>SEQ 01 — OPEN</span>
+    <ul class="bar__nav mono">
+      <li><a href="#work" data-magnetic>Work</a></li>
+      <li><a href="#reels" data-magnetic>Reels</a></li>
+      <li class="hide-sm"><a href="#vfx" data-magnetic>VFX</a></li>
+      <li><a href="#contact" data-magnetic>Contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" data-seq="SEQ 01 — OPEN">
+      <div class="hero__media media" data-cursor="play" data-play-reel>
+        <div class="ph ph--hero" aria-hidden="true"></div>
+        <video class="lazy-video" data-src="" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <div class="hero__shade"></div>
+      </div>
+
+      <div class="hero__inner">
+        <p class="hero__kicker mono"><span>[ 00:00:00:00 ]</span> <span>PORTFOLIO — 2026</span></p>
+        <h1 class="hero__title" aria-label="Humam Flayyes">
+          <span class="hero__line" data-kinetic aria-hidden="true">HUMAM</span>
+          <span class="hero__line" data-kinetic aria-hidden="true">FLAYYES</span>
+        </h1>
+        <div class="hero__foot">
+          <p class="hero__ar" lang="ar" dir="rtl">هُمام فليّس</p>
+          <p class="hero__tag mono">Video Editor <i>·</i> Motion <i>·</i> VFX</p>
+          <button class="btn btn--accent" type="button" data-play-reel data-magnetic>
+            <span class="btn__dot"></span><span>Watch full reel</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__scroll mono" aria-hidden="true"><span>SCROLL</span><i></i></div>
+    </section>
+
+    <!-- ============ SELECTED WORK (timeline) ============ -->
+    <section class="work" id="work" data-seq="SEQ 02 — SELECTED WORK">
+      <div class="work__pin">
+        <div class="sec-head">
+          <p class="sec-head__idx mono">[ 02 ]</p>
+          <h2 class="sec-head__title" data-split>Selected Work</h2>
+          <p class="sec-head__note mono">Drag the playhead with your scroll. Click a clip to watch.</p>
+        </div>
+
+        <div class="tl">
+          <div class="tl__ruler" aria-hidden="true"><div class="tl__ruler-track" data-ruler></div></div>
+          <div class="tl__lanes">
+            <div class="tl__heads mono" aria-hidden="true">
+              <span>V1</span><span>A1</span>
+            </div>
+            <div class="tl__viewport" data-tl-viewport>
+              <ul class="tl__track" data-tl-track></ul>
+            </div>
+          </div>
+          <div class="playhead" aria-hidden="true">
+            <span class="playhead__tc mono" data-playhead-tc>00:00:00:00</span>
+            <span class="playhead__line"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REELS ============ -->
+    <section class="reels" id="reels" data-seq="SEQ 03 — REELS">
+      <div class="sec-head">
+        <p class="sec-head__idx mono">[ 03 ]</p>
+        <h2 class="sec-head__title" data-split>Short&#8209;form Reels</h2>
+        <p class="sec-head__note mono">9:16 · Arabic &amp; English · made to stop the scroll</p>
+      </div>
+
+      <a class="stat" data-stat-link target="_blank" rel="noopener" data-magnetic>
+        <span class="stat__num" data-counter>0</span>
+        <span class="stat__label mono"><span data-stat-label>views</span> <span class="arrow">↗</span></span>
+      </a>
+
+      <div class="reels__row" data-reels></div>
+    </section>
+
+    <!-- ============ VFX BREAKDOWN ============ -->
+    <section class="vfx" id="vfx" data-seq="SEQ 04 — VFX BREAKDOWN">
+      <div class="sec-head">
+        <p class="sec-head__idx mono">[ 04 ]</p>
+        <h2 class="sec-head__title" data-split>VFX Breakdown</h2>
+        <p class="sec-head__note mono" data-vfx-title>Drag to compare</p>
+      </div>
+
+      <div class="ba" data-ba>
+        <div class="ba__layer ba__after media">
+          <div class="ph ph--after" aria-hidden="true"><span class="ph__label mono">FINAL — no signal</span></div>
+          <video class="lazy-video" data-ba-after muted loop playsinline preload="none"></video>
+        </div>
+        <div class="ba__layer ba__before media" data-ba-clip>
+          <div class="ph ph--before" aria-hidden="true"><span class="ph__label mono">RAW PLATE — no signal</span></div>
+          <video class="lazy-video" data-ba-before muted loop playsinline preload="none"></video>
+        </div>
+        <span class="ba__tag ba__tag--l mono">RAW</span>
+        <span class="ba__tag ba__tag--r mono">FINAL</span>
+        <div class="ba__handle" data-ba-handle role="slider" tabindex="0"
+             aria-label="Before / after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <span class="ba__knob mono">◀ ▶</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES (marquee) ============ -->
+    <section class="services" id="services" data-seq="SEQ 05 — SERVICES">
+      <div class="sec-head sec-head--inline">
+        <p class="sec-head__idx mono">[ 05 ]</p>
+        <p class="sec-head__note mono">What I cut, animate &amp; composite</p>
+      </div>
+      <div class="marquee" data-marquee="1"><div class="marquee__inner"></div></div>
+      <div class="marquee marquee--outline" data-marquee="-1"><div class="marquee__inner"></div></div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact" data-seq="SEQ 06 — FADE OUT">
+      <p class="sec-head__idx mono">[ 06 ] — Have a story? Let's cut it together.</p>
+      <h2 class="contact__title" data-distort>
+        <span>LET'S</span>
+        <span>CREATE</span>
+      </h2>
+      <div class="contact__row">
+        <a class="btn btn--accent btn--xl" data-email data-magnetic>
+          <span class="btn__dot"></span><span>Send an email</span>
+        </a>
+        <ul class="socials" data-socials></ul>
+      </div>
+      <footer class="foot mono">
+        <span>© <span data-year></span> Humam Flayyes — هُمام فليّس</span>
+        <span>END OF SEQUENCE · <span data-live-tc>00:00:00:00</span></span>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ============ FULL-SCREEN PLAYER ============ -->
+  <div class="player" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <div class="player__bar mono">
+      <span data-player-title>NOW PLAYING</span>
+      <button class="player__close" type="button" data-player-close data-magnetic aria-label="Close player">CLOSE ✕</button>
+    </div>
+    <div class="player__frame" data-player-frame></div>
+  </div>
+
+  <!-- SVG filter for the contact distortion -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="distort" x="-10%" y="-20%" width="120%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="2" seed="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <script src="projects.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
