@@ -107,8 +107,8 @@
     }).join("");
   }
 
-  function renderReels() {
-    $("[data-reels]").innerHTML = REELS.map((r, i) => {
+  function renderReels(target = "[data-reels]", list = REELS, ui = () => "@humam.fly") {
+    $(target).innerHTML = list.map((r, i) => {
       const h = HUES[(i + 2) % HUES.length];
       const playable = r.full || r.youtube;
       const tag = playable ? "button" : r.url ? "a" : "div";
@@ -125,7 +125,7 @@
           </span>
           <video class="lazy-video" data-src="${esc(r.preview)}" muted loop playsinline preload="none" aria-hidden="true"></video>
         </span>
-        <span class="phone__ui mono"><span>@humam.fly</span><span>9:16</span></span>
+        <span class="phone__ui mono"><span>${esc(ui(r))}</span><span>9:16</span></span>
       </${tag}>`;
     }).join("");
   }
@@ -182,6 +182,9 @@
 
   renderWork();
   renderReels();
+  const SPEC = window.SPEC || { items: [] };
+  renderReels("[data-spec]", SPEC.items, (r) => r.style);
+  if (SPEC.note) $("[data-spec-note]").textContent = SPEC.note;
   renderMarquees();
   renderStatic();
 
@@ -321,10 +324,10 @@
     const b = e.target.closest(".clip__btn");
     if (b) playFrom(b);
   });
-  $("[data-reels]").addEventListener("click", (e) => {
+  $$("[data-reels], [data-spec]").forEach((row) => row.addEventListener("click", (e) => {
     const b = e.target.closest("button.phone");
     if (b) playFrom(b);
-  });
+  }));
 
   /* =========================================================
      CUSTOM CURSOR + MAGNETIC BUTTONS (fine pointers only)
@@ -726,7 +729,7 @@
 
   function reelsIntro(mm) {
     if (REDUCE) return;
-    gsap.from(".phone", {
+    gsap.from(".reels .phone, .spec .phone", {
       yPercent: 30, opacity: 0, rotate: (i) => (i % 2 ? 4 : -4), duration: 1.2, ease: "expo.out", stagger: 0.1,
       scrollTrigger: { trigger: ".reels__row", start: "top 85%", once: true },
     });

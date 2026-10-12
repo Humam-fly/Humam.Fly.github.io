@@ -127,6 +127,23 @@ window.REELS = [
 ];
 
 /* ---------------------------------------------------------------------
+   SPEC LAB — one fictional brand ("Kavora"), six motion styles.
+   Spec work: made to show range, not a paid client project.
+   --------------------------------------------------------------------- */
+window.SPEC = {
+  brand: "Kavora",
+  note: "Spec work · fictional brand · original graphics, music & SFX",
+  items: [
+    { title: "Built in Silence",  style: "Kinetic Typography",   preview: "videos/preview/spec-kinetic.mp4", full: "videos/full/spec-kinetic.mp4" },
+    { title: "The Inbox",         style: "Paper Collage",        preview: "videos/preview/spec-collage.mp4", full: "videos/full/spec-collage.mp4" },
+    { title: "The Raise",         style: "Glass UI",             preview: "videos/preview/spec-glass.mp4",   full: "videos/full/spec-glass.mp4" },
+    { title: "Five Cities",       style: "Editorial · Data",     preview: "videos/preview/spec-map.mp4",     full: "videos/full/spec-map.mp4" },
+    { title: "On Autopilot",      style: "Product Launch · App UI", preview: "videos/preview/spec-launch.mp4", full: "videos/full/spec-launch.mp4" },
+    { title: "بصمت",              style: "Arabic Kinetic Type",  preview: "videos/preview/spec-arabic.mp4",  full: "videos/full/spec-arabic.mp4" },
+  ],
+};
+
+/* ---------------------------------------------------------------------
    ABOUT
    --------------------------------------------------------------------- */
 window.ABOUT = {
