@@ -283,13 +283,14 @@
     frame.innerHTML = id
       ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
       title="${esc(title || "Video")}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`
-      : `<video class="player__video" src="${esc(file)}" controls autoplay playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
+      : `<video class="player__video${/showreel\.mp4$/.test(file) ? " is-wide" : ""}" src="${esc(file)}" controls autoplay playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
     $("[data-player-title]").textContent = `▶ NOW PLAYING — ${title || "Showreel"}`;
     player.hidden = false;
     inertTargets.forEach((el) => el && (el.inert = true));
     lenis && lenis.stop();
     html.style.overflow = "hidden";
     lazyVideos.forEach((v) => v.pause());
+    const hv = $(".hero video"); if (hv && !hv.muted) $("[data-sound]") && $("[data-sound]").click();
     if (HAS_GSAP && !REDUCE) {
       gsap.fromTo(player, { clipPath: "inset(50% 0 50% 0)" }, { clipPath: "inset(0% 0 0% 0)", duration: 0.7, ease: "expo.inOut" });
     }
@@ -321,12 +322,32 @@
   $("[data-player-close]").addEventListener("click", () => closePlayer());
   D.addEventListener("keydown", (e) => { if (e.key === "Escape") closePlayer(); });
 
-  const reelURL = (SITE.showreel && SITE.showreel.youtube) || "";
+  const REEL = SITE.showreel || {};
+  const reelFile = () => (mq("(orientation: portrait)") && REEL.fullVertical) || REEL.full || "";
   $$("[data-play-reel]").forEach((el) => {
     // On touch, the whole hero shouldn't hijack taps — only the button opens the reel
     if (el.classList.contains("hero__media") && !FINE) return;
-    el.addEventListener("click", () => openPlayer(reelURL, "Showreel"));
+    el.addEventListener("click", () => openPlayer(REEL.youtube || "", "Showreel 2026", REEL.youtube ? "" : reelFile()));
   });
+
+  // Sound toggle: unmutes the background reel in place
+  const soundBtn = $("[data-sound]");
+  const heroVideo = $(".hero video");
+  if (soundBtn && heroVideo) {
+    soundBtn.addEventListener("click", () => {
+      const on = heroVideo.muted;
+      heroVideo.muted = !on;
+      if (on) {
+        loadVideo(heroVideo);
+        if (heroVideo.currentTime > 1 && heroVideo.dataset.restarted !== "1") { heroVideo.currentTime = 0; heroVideo.dataset.restarted = "1"; }
+        const pr = heroVideo.play(); if (pr && pr.catch) pr.catch(() => {});
+      }
+      soundBtn.setAttribute("aria-pressed", String(on));
+      soundBtn.setAttribute("aria-label", on ? "Turn sound off" : "Turn sound on");
+      $("[data-sound-label]", soundBtn).textContent = on ? "Sound on" : "Sound off";
+      soundBtn.classList.toggle("is-on", on);
+    });
+  }
   const playFrom = (b) => openPlayer(b.dataset.youtube, b.dataset.title, b.dataset.full);
   $("[data-tl-track]").addEventListener("click", (e) => {
     const b = e.target.closest(".clip__btn");

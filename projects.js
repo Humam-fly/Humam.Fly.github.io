@@ -20,9 +20,11 @@ window.SITE = {
   email: "hu.flayyes@gmail.com",
 
   showreel: {
-    preview: "videos/showreel.mp4",                 // muted hero loop (wide screens)
-    vertical: "videos/showreel-vertical.mp4",       // muted hero loop (phones)
-    youtube: "https://youtu.be/iCCul0R5n9U",        // "Watch full reel"
+    preview: "videos/showreel.mp4",                 // front-page background (wide screens) — same file as the full reel
+    vertical: "videos/showreel-vertical.mp4",       // front-page background (phones)
+    full: "videos/showreel.mp4",                    // "Watch full reel" (plays on the site, with sound)
+    fullVertical: "videos/showreel-vertical.mp4",
+    youtube: "",                                    // optional: paste a YouTube link to use that instead
   },
 
   socials: [
