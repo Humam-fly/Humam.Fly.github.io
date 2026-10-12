@@ -16,6 +16,7 @@
   const PROJECTS = window.PROJECTS || [];
   const REELS = window.REELS || [];
   const ABOUT = window.ABOUT || {};
+  const BREAKDOWN = window.BREAKDOWN || {};
   const SERVICES = window.SERVICES || [];
 
   const REDUCE = mq("(prefers-reduced-motion: reduce)");
@@ -142,7 +143,14 @@
 
   function renderStatic() {
     const heroVid = $(".hero video");
-    heroVid.dataset.src = (SITE.showreel && SITE.showreel.preview) || "";
+    const reel = SITE.showreel || {};
+    heroVid.dataset.src = (mq("(orientation: portrait)") && reel.vertical) || reel.preview || "";
+
+    const baB = $("[data-ba-before]"), baA = $("[data-ba-after]");
+    if (baB) baB.dataset.src = BREAKDOWN.before || "";
+    if (baA) baA.dataset.src = BREAKDOWN.after || "";
+    if ($("[data-ba-title]")) $("[data-ba-title]").textContent = BREAKDOWN.title || "";
+    if ($("[data-ba-body]")) $("[data-ba-body]").textContent = BREAKDOWN.body || "";
 
     const photo = $("[data-about-photo]");
     if (photo && ABOUT.photo) {
@@ -386,6 +394,49 @@
   }, 1000 / FPS);
 
   /* =========================================================
+     RAW → FINAL SLIDER
+     ========================================================= */
+  const ba = $("[data-ba]");
+  const baState = { pos: 50 };
+  let baDragging = false;
+  if (ba) {
+    const handle = $("[data-ba-handle]");
+    const setPos = (v) => {
+      baState.pos = clamp(v, 0, 100);
+      ba.style.setProperty("--pos", `${baState.pos}%`);
+      handle.setAttribute("aria-valuenow", Math.round(baState.pos));
+    };
+    const fromEvent = (e) => {
+      const r = ba.getBoundingClientRect();
+      return ((e.clientX - r.left) / r.width) * 100;
+    };
+    ba.addEventListener("pointerdown", (e) => {
+      // touch: only the handle drags, so swiping over the frame still scrolls the page
+      if (e.pointerType !== "mouse" && !handle.contains(e.target)) return;
+      baDragging = true;
+      ba.classList.add("is-dragging");
+      if (HAS_GSAP) gsap.killTweensOf(baState);
+      setPos(fromEvent(e));
+    });
+    window.addEventListener("pointermove", (e) => { if (baDragging) setPos(fromEvent(e)); }, { passive: true });
+    const stop = () => { baDragging = false; ba.classList.remove("is-dragging"); };
+    window.addEventListener("pointerup", stop);
+    window.addEventListener("pointercancel", stop);
+    handle.addEventListener("keydown", (e) => {
+      const step = e.shiftKey ? 10 : 4;
+      if (e.key === "ArrowLeft") { setPos(baState.pos - step); e.preventDefault(); }
+      if (e.key === "ArrowRight") { setPos(baState.pos + step); e.preventDefault(); }
+    });
+    ba._setPos = setPos;
+    // keep both clips frame-synced
+    const a = $("[data-ba-after]"), b = $("[data-ba-before]");
+    setInterval(() => {
+      if (a.paused || b.paused || !a.readyState || !b.readyState) return;
+      if (Math.abs(a.currentTime - b.currentTime) > 0.08) b.currentTime = a.currentTime;
+    }, 1000);
+  }
+
+  /* =========================================================
      TIMELINE — playhead, timecode, active clip
      ========================================================= */
   const tl = $(".tl");
@@ -533,6 +584,7 @@
     reelsCounter();
     reelsIntro(mm);
     aboutIntro();
+    baHint();
     marquee();
     contactDistort();
 
@@ -740,6 +792,16 @@
           scrollTrigger: { trigger: ".reels__row", start: "top bottom", end: "bottom top", scrub: true },
         });
       });
+    });
+  }
+
+  /* ---------- raw → final hint ---------- */
+  function baHint() {
+    if (REDUCE || !ba) return;
+    const go = (v, d) => ({ pos: v, duration: d, ease: "power3.inOut", onUpdate: () => ba._setPos(baState.pos) });
+    ScrollTrigger.create({
+      trigger: ba, start: "top 70%", once: true,
+      onEnter: () => { if (!baDragging) gsap.timeline().to(baState, go(20, .9)).to(baState, go(80, 1.1)).to(baState, go(50, .8)); },
     });
   }
 

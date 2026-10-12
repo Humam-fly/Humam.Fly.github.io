@@ -428,6 +428,44 @@ h1, h2, p { margin: 0; }
 .phone .ph__label { top: 44px; }
 
 /* ---------------------------------------------------------
+   RAW → FINAL
+   --------------------------------------------------------- */
+.breakdown { padding: clamp(100px, 16vh, 200px) 0 clamp(40px, 8vh, 100px); }
+.ba-wrap {
+  display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 80px); padding: 0 var(--gut); align-items: center;
+}
+.ba {
+  --pos: 50%;
+  position: relative; aspect-ratio: 9 / 16; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 22px;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none;
+}
+.ba__layer { position: absolute; inset: 0; }
+.ba__before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba__tag { position: absolute; top: 14px; z-index: 3; padding: 4px 8px; background: rgba(0,0,0,.6); color: var(--ink); }
+.ba__tag--l { left: 14px; }
+.ba__tag--r { right: 14px; background: var(--accent); color: var(--accent-ink); }
+.ba__handle {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 4;
+  width: 64px; margin-left: -32px; cursor: ew-resize; touch-action: none;
+  display: grid; place-items: center;
+}
+.ba__handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--ink); }
+.ba__knob {
+  position: relative; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--ink); color: var(--bg); font-size: 10px; letter-spacing: 0;
+  transition: transform .3s var(--ease);
+}
+.ba__handle:hover .ba__knob, .ba.is-dragging .ba__knob { transform: scale(1.12); }
+.has-cursor .ba__handle { cursor: none; }
+.ba-copy__lead {
+  font-size: clamp(30px, 3.4vw, 56px); font-weight: 900; font-stretch: 62%; line-height: .95;
+  text-transform: uppercase; margin-bottom: 18px;
+}
+.ba-copy__body { color: var(--ink-dim); max-width: 44ch; font-size: clamp(16px, 1.2vw, 19px); line-height: 1.55; }
+
+/* ---------------------------------------------------------
    SPEC LAB
    --------------------------------------------------------- */
 .spec { padding: clamp(80px, 12vh, 160px) 0 clamp(60px, 10vh, 120px); }
@@ -570,6 +608,8 @@ h1, h2, p { margin: 0; }
   .hero__scroll { display: none; }
   .tl { --clip-w: 58vw; --head-w: 30px; }
   .about__grid { grid-template-columns: 1fr; }
+  .ba-wrap { grid-template-columns: 1fr; }
+  .ba { max-width: 78vw; margin: 0 auto; }
   .about__meta { grid-template-columns: 1fr; }
   .playhead { left: calc(var(--head-w) + 12%); }
   .reels__row {

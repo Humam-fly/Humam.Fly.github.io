@@ -20,7 +20,8 @@ window.SITE = {
   email: "hu.flayyes@gmail.com",
 
   showreel: {
-    preview: "videos/showreel.mp4",                 // muted hero loop
+    preview: "videos/showreel.mp4",                 // muted hero loop (wide screens)
+    vertical: "videos/showreel-vertical.mp4",       // muted hero loop (phones)
     youtube: "https://youtu.be/iCCul0R5n9U",        // "Watch full reel"
   },
 
@@ -112,6 +113,16 @@ window.PROJECTS = [
     full: "videos/full/supermetall.mp4",
   },
 ];
+
+/* ---------------------------------------------------------------------
+   RAW → FINAL — before/after slider (two clips, same length, in sync)
+   --------------------------------------------------------------------- */
+window.BREAKDOWN = {
+  before: "videos/breakdown-raw.mp4",     // raw green-screen, filmed off my monitor while editing (2024)
+  after:  "videos/breakdown-final.mp4",   // the finished edit, same moment
+  title:  "Green screen → snowy explainer.",
+  body:   "Left: the raw plate, filmed off my monitor while I was editing in 2024. Right: the finished cut — key, snow particles, B-roll, captions and pacing.",
+};
 
 /* ---------------------------------------------------------------------
    REELS — phone frames that auto-play when on screen.
