@@ -50,7 +50,7 @@
     <ul class="bar__nav mono">
       <li><a href="#work" data-magnetic>Work</a></li>
       <li><a href="#reels" data-magnetic>Reels</a></li>
-      <li class="hide-sm"><a href="#vfx" data-magnetic>VFX</a></li>
+      <li class="hide-sm"><a href="#about" data-magnetic>About</a></li>
       <li><a href="#contact" data-magnetic>Contact</a></li>
     </ul>
   </nav>
@@ -88,7 +88,7 @@
         <div class="sec-head">
           <p class="sec-head__idx mono">[ 02 ]</p>
           <h2 class="sec-head__title" data-split>Selected Work</h2>
-          <p class="sec-head__note mono">Drag the playhead with your scroll. Click a clip to watch.</p>
+          <p class="sec-head__note mono">Scroll to scrub the timeline. Click a clip to watch it with sound.</p>
         </div>
 
         <div class="tl">
@@ -114,7 +114,7 @@
       <div class="sec-head">
         <p class="sec-head__idx mono">[ 03 ]</p>
         <h2 class="sec-head__title" data-split>Short&#8209;form Reels</h2>
-        <p class="sec-head__note mono">9:16 · Arabic &amp; English · made to stop the scroll</p>
+        <p class="sec-head__note mono">9:16 · Arabic &amp; English · tap a phone to watch</p>
       </div>
 
       <a class="stat" data-stat-link target="_blank" rel="noopener" data-magnetic>
@@ -125,28 +125,31 @@
       <div class="reels__row" data-reels></div>
     </section>
 
-    <!-- ============ VFX BREAKDOWN ============ -->
-    <section class="vfx" id="vfx" data-seq="SEQ 04 — VFX BREAKDOWN">
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" data-seq="SEQ 04 — ABOUT">
       <div class="sec-head">
         <p class="sec-head__idx mono">[ 04 ]</p>
-        <h2 class="sec-head__title" data-split>VFX Breakdown</h2>
-        <p class="sec-head__note mono" data-vfx-title>Drag to compare</p>
+        <h2 class="sec-head__title" data-split>Behind the Cut</h2>
+        <p class="sec-head__note mono">Editor · Motion · Performer</p>
       </div>
-
-      <div class="ba" data-ba>
-        <div class="ba__layer ba__after media">
-          <div class="ph ph--after" aria-hidden="true"><span class="ph__label mono">FINAL — no signal</span></div>
-          <video class="lazy-video" data-ba-after muted loop playsinline preload="none"></video>
-        </div>
-        <div class="ba__layer ba__before media" data-ba-clip>
-          <div class="ph ph--before" aria-hidden="true"><span class="ph__label mono">RAW PLATE — no signal</span></div>
-          <video class="lazy-video" data-ba-before muted loop playsinline preload="none"></video>
-        </div>
-        <span class="ba__tag ba__tag--l mono">RAW</span>
-        <span class="ba__tag ba__tag--r mono">FINAL</span>
-        <div class="ba__handle" data-ba-handle role="slider" tabindex="0"
-             aria-label="Before / after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-          <span class="ba__knob mono">◀ ▶</span>
+      <div class="about__grid">
+        <figure class="about__photo media" data-about-photo>
+          <div class="ph" aria-hidden="true"><span class="ph__label mono">No signal</span></div>
+          <span class="about__rec mono"><span class="rec"></span> CAM A · TAKE 03</span>
+          <figcaption class="about__cap mono" data-about-cap></figcaption>
+        </figure>
+        <div class="about__text">
+          <div class="about__lines" data-about-lines></div>
+          <div class="about__meta">
+            <div>
+              <p class="mono about__label">Tools</p>
+              <ul class="about__tags" data-about-tools></ul>
+            </div>
+            <div>
+              <p class="mono about__label">In development</p>
+              <ul class="about__dev" data-about-dev></ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

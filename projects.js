@@ -3,18 +3,21 @@
    ---------------------------------------------------------------------
    This is the ONLY file you need to edit to update the site.
 
-   HOW TO ADD YOUR VIDEOS
-   1. Export a short, silent preview loop (5–10 s, 720p, H.264 .mp4,
-      ideally under 3 MB) and drop it in the /videos folder.
-   2. Point "preview" at it, e.g.  preview: "videos/my-project.mp4"
-   3. Paste the full video's YouTube link into "youtube".
-   Until a file exists, the site shows a styled "no signal" placeholder,
+   Each project has:
+     title     : project name
+     category  : short tag shown on the clip
+     page      : who it was for (optional, leave "" to hide)
+     preview   : short silent loop in /videos/preview  (5–10 s, ~1 MB)
+     full      : the full video in /videos/full         (plays with sound)
+     youtube   : OPTIONAL — a YouTube link. If you add one, it is used
+                 instead of "full".
+   If a file is missing, the site shows a "no signal" placeholder,
    so nothing ever looks broken.
    ===================================================================== */
 
 window.SITE = {
-  // ✉️  Replace with your real email address
-  email: "your.email@example.com",
+  // ✉️  Swap for your work email when you make one
+  email: "hu.flayyes@gmail.com",
 
   showreel: {
     preview: "videos/showreel.mp4",                 // muted hero loop
@@ -28,87 +31,121 @@ window.SITE = {
   ],
 
   reelsStat: {
-    value: 1000000,                                  // counts up to this
+    value: 1200000,                                  // counts up to this
     label: "views on a single reel",
     url: "https://www.instagram.com/reel/DVWoDl9krW7/",
   },
 };
 
 /* ---------------------------------------------------------------------
-   SELECTED WORK — horizontal timeline
-   title     : project name
-   category  : short tag shown on the clip
-   year      : optional
-   preview   : muted loop in /videos
-   youtube   : full video (youtu.be/…, youtube.com/watch?v=…, or /shorts/…)
+   SELECTED WORK — the horizontal timeline (vertical 9:16 clips)
    --------------------------------------------------------------------- */
 window.PROJECTS = [
   {
-    title: "Showreel 2026",
-    category: "Editing · VFX",
-    year: "2026",
-    preview: "videos/project-01.mp4",
-    youtube: "https://youtu.be/iCCul0R5n9U",
+    title: "Lenin's First Statue",
+    category: "Explainer · Motion Graphics",
+    page: "",
+    preview: "videos/preview/lenin.mp4",
+    full: "videos/full/lenin.mp4",
   },
   {
-    title: "Brand Film",
-    category: "Commercial",
-    year: "2026",
-    preview: "videos/project-02.mp4",
-    youtube: "https://youtu.be/iCCul0R5n9U",
+    title: "Best Actress — Ramadan 2026",
+    category: "Motion Graphics · Drama",
+    page: "",
+    preview: "videos/preview/best-actress.mp4",
+    full: "videos/full/best-actress.mp4",
   },
   {
-    title: "Title Sequence",
-    category: "Motion Graphics",
-    year: "2025",
-    preview: "videos/project-03.mp4",
-    youtube: "https://youtu.be/iCCul0R5n9U",
+    title: "How Rich Are You?",
+    category: "Podcast Clip · Motion Graphics",
+    page: "",
+    preview: "videos/preview/podcast-clip.mp4",
+    full: "videos/full/podcast-clip.mp4",
   },
   {
-    title: "Music Video",
-    category: "Edit · Color",
-    year: "2025",
-    preview: "videos/project-04.mp4",
-    youtube: "https://youtu.be/iCCul0R5n9U",
+    title: "Ramadan 2026",
+    category: "Drama Promo",
+    page: "",
+    preview: "videos/preview/ramadan-2026.mp4",
+    full: "videos/full/ramadan-2026.mp4",
   },
   {
-    title: "Documentary Cut",
-    category: "Arabic Content",
-    year: "2025",
-    preview: "videos/project-05.mp4",
-    youtube: "https://youtu.be/iCCul0R5n9U",
+    title: "Ice Cream at −30°C",
+    category: "Talking Head · Motion Graphics",
+    page: "",
+    preview: "videos/preview/ice-cream.mp4",
+    full: "videos/full/ice-cream.mp4",
   },
   {
-    title: "Product Launch",
-    category: "VFX · 3D",
-    year: "2024",
-    preview: "videos/project-06.mp4",
-    youtube: "https://youtu.be/iCCul0R5n9U",
+    title: "Most Despicable Character",
+    category: "Drama Hype Edit",
+    page: "",
+    preview: "videos/preview/family-kitchen.mp4",
+    full: "videos/full/family-kitchen.mp4",
+  },
+  {
+    title: "The Secret",
+    category: "Drama Promo",
+    page: "",
+    preview: "videos/preview/the-secret.mp4",
+    full: "videos/full/the-secret.mp4",
+  },
+  {
+    title: "Syrian Village Festival",
+    category: "Event Promo · News",
+    page: "Flash Platform",
+    preview: "videos/preview/syrian-village.mp4",
+    full: "videos/full/syrian-village.mp4",
+  },
+  {
+    title: "Lafat Altayib",
+    category: "Human-Interest Story",
+    page: "Free Media",
+    preview: "videos/preview/lafat-altayib.mp4",
+    full: "videos/full/lafat-altayib.mp4",
+  },
+  {
+    title: "Supermetall, Moscow",
+    category: "Location Tour",
+    page: "",
+    preview: "videos/preview/supermetall.mp4",
+    full: "videos/full/supermetall.mp4",
   },
 ];
 
 /* ---------------------------------------------------------------------
-   REELS — vertical 9:16 short-form edits (auto-play when on screen)
-   url is optional: where tapping the phone takes you.
+   REELS — phone frames that auto-play when on screen.
+   Tapping one opens the full video (or "url" if you set one instead).
    --------------------------------------------------------------------- */
 window.REELS = [
-  { title: "Reel 01", preview: "videos/reel-01.mp4", url: "https://www.instagram.com/reel/DVWoDl9krW7/" },
-  { title: "Reel 02", preview: "videos/reel-02.mp4", url: "https://www.instagram.com/humam.fly/" },
-  { title: "Reel 03", preview: "videos/reel-03.mp4", url: "https://www.instagram.com/humam.fly/" },
-  { title: "Reel 04", preview: "videos/reel-04.mp4", url: "https://www.instagram.com/humam.fly/" },
+  { title: "Samaher",         preview: "videos/preview/samaher.mp4",        full: "videos/full/samaher.mp4" },
+  { title: "Three Stars",     preview: "videos/preview/three-stars.mp4",    full: "videos/full/three-stars.mp4" },
+  { title: "Hidden Charges",  preview: "videos/preview/hidden-charges.mp4", full: "videos/full/hidden-charges.mp4" },
+  { title: "Russian Smile",   preview: "videos/preview/russian-smile.mp4",  full: "videos/full/russian-smile.mp4" },
+  { title: "Misr Mosque",     preview: "videos/preview/egypt-mosque.mp4",   full: "videos/full/egypt-mosque.mp4" },
+  { title: "Banned",          preview: "videos/preview/banned.mp4",         full: "videos/full/banned.mp4" },
 ];
 
 /* ---------------------------------------------------------------------
-   VFX BREAKDOWN — before/after slider
-   Use two clips of the SAME length and framing.
+   ABOUT
    --------------------------------------------------------------------- */
-window.BREAKDOWN = {
-  title: "Sky replacement & compositing",
-  before: "videos/vfx-before.mp4",   // raw plate
-  after:  "videos/vfx-after.mp4",    // final shot
+window.ABOUT = {
+  photo: "images/humam-stage.jpg",
+  photoCaption: "Open mic final — top 3 of 10",
+  lines: [
+    "I'm Humam — a Syrian editor from Aleppo, based in Riyadh.",
+    "Self-taught. I started out cutting music and lyric videos for Aleppo's rap scene, and never stopped.",
+    "Today I edit Arabic & English short-form: drama promos, news reels, talking heads and motion-graphics explainers that stop the scroll.",
+    "I also come from the stage — acting and stand-up — which is why I cut for performance and timing first.",
+  ],
+  tools: ["Premiere Pro", "After Effects", "Audition", "DaVinci Resolve"],
+  inDevelopment: [
+    { title: "SHIFT · نَوْبة", note: "vertical micro-series" },
+    { title: "TRUMAN", note: "short film" },
+  ],
 };
 
 /* ---------------------------------------------------------------------
    SERVICES — the giant marquee
    --------------------------------------------------------------------- */
-window.SERVICES = ["Editing", "Motion Graphics", "VFX", "Reels", "Arabic & English content"];
+window.SERVICES = ["Editing", "Motion Graphics", "Drama Promos", "News Reels", "Talking Heads", "Arabic & English content"];

@@ -15,7 +15,7 @@
   const SITE = window.SITE || {};
   const PROJECTS = window.PROJECTS || [];
   const REELS = window.REELS || [];
-  const BREAKDOWN = window.BREAKDOWN || {};
+  const ABOUT = window.ABOUT || {};
   const SERVICES = window.SERVICES || [];
 
   const REDUCE = mq("(prefers-reduced-motion: reduce)");
@@ -88,17 +88,17 @@
       const h = HUES[i % HUES.length];
       return `
       <li class="clip">
-        <button class="clip__btn" type="button" data-cursor="play" data-youtube="${esc(p.youtube)}" data-title="${esc(p.title)}" aria-label="Play ${esc(p.title)}">
+        <button class="clip__btn" type="button" data-cursor="play" data-youtube="${esc(p.youtube || "")}" data-full="${esc(p.full || "")}" data-title="${esc(p.title)}" aria-label="Play ${esc(p.title)}">
           <span class="clip__media media" style="display:block">
             <span class="ph" style="--h:${h}">
-              <span class="ph__label mono">No signal · ${esc(p.preview)}</span>
+              <span class="ph__label mono">No signal</span>
               <span class="ph__title">${esc(p.title)}</span>
             </span>
             <video class="lazy-video" data-src="${esc(p.preview)}" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="clip__label mono">C${pad(i + 1)} · ${tc(i * CLIP_SECONDS * FPS)}</span>
             <span class="clip__info">
               <span class="clip__title" role="heading" aria-level="3">${esc(p.title)}</span>
-              <span class="clip__meta mono"><b>${esc(p.category)}</b><span>${esc(p.year || "")}</span></span>
+              <span class="clip__meta mono"><b>${esc(p.category)}</b>${p.page ? `<span>for ${esc(p.page)}</span>` : ""}</span>
             </span>
           </span>
         </button>
@@ -110,10 +110,13 @@
   function renderReels() {
     $("[data-reels]").innerHTML = REELS.map((r, i) => {
       const h = HUES[(i + 2) % HUES.length];
-      const tag = r.url ? "a" : "div";
-      const attrs = r.url ? `href="${esc(r.url)}" target="_blank" rel="noopener" aria-label="${esc(r.title)} on Instagram"` : "";
+      const playable = r.full || r.youtube;
+      const tag = playable ? "button" : r.url ? "a" : "div";
+      const attrs = playable
+        ? `type="button" data-full="${esc(r.full || "")}" data-youtube="${esc(r.youtube || "")}" data-title="${esc(r.title)}" aria-label="Play ${esc(r.title)}"`
+        : r.url ? `href="${esc(r.url)}" target="_blank" rel="noopener" aria-label="${esc(r.title)} on Instagram"` : "";
       return `
-      <${tag} class="phone" ${attrs} data-cursor="play" data-cursor-label="VIEW">
+      <${tag} class="phone" ${attrs} data-cursor="play" data-cursor-label="${playable ? "PLAY" : "VIEW"}">
         <span class="phone__notch"></span>
         <span class="phone__screen media" style="display:block">
           <span class="ph" style="--h:${h}">
@@ -141,9 +144,24 @@
     const heroVid = $(".hero video");
     heroVid.dataset.src = (SITE.showreel && SITE.showreel.preview) || "";
 
-    $("[data-ba-before]").dataset.src = BREAKDOWN.before || "";
-    $("[data-ba-after]").dataset.src = BREAKDOWN.after || "";
-    if (BREAKDOWN.title) $("[data-vfx-title]").textContent = `${BREAKDOWN.title} — drag to compare`;
+    const photo = $("[data-about-photo]");
+    if (photo && ABOUT.photo) {
+      const img = new Image();
+      img.alt = "Humam Flayyes on stage";
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.onload = () => photo.classList.add("is-loaded");
+      img.src = ABOUT.photo;
+      photo.insertBefore(img, photo.firstChild);
+    }
+    const cap = $("[data-about-cap]");
+    if (cap) cap.textContent = ABOUT.photoCaption || "";
+    const lines = $("[data-about-lines]");
+    if (lines) lines.innerHTML = (ABOUT.lines || []).map((l, i) => `<p class="${i ? "" : "about__lead"}">${esc(l)}</p>`).join("");
+    const tools = $("[data-about-tools]");
+    if (tools) tools.innerHTML = (ABOUT.tools || []).map((t) => `<li>${esc(t)}</li>`).join("");
+    const dev = $("[data-about-dev]");
+    if (dev) dev.innerHTML = (ABOUT.inDevelopment || []).map((d) => `<li><b>${esc(d.title)}</b> <span class="mono">${esc(d.note || "")}</span></li>`).join("");
 
     const stat = SITE.reelsStat || {};
     const link = $("[data-stat-link]");
@@ -247,12 +265,14 @@
     return m ? m[1] : null;
   }
 
-  function openPlayer(url, title) {
+  function openPlayer(url, title, file) {
     const id = ytId(url);
-    if (!id) { if (url) window.open(url, "_blank", "noopener"); return; }
+    if (!id && !file) { if (url) window.open(url, "_blank", "noopener"); return; }
     lastFocus = D.activeElement;
-    frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
-      title="${esc(title || "Video")}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+    frame.innerHTML = id
+      ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+      title="${esc(title || "Video")}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`
+      : `<video class="player__video" src="${esc(file)}" controls autoplay playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
     $("[data-player-title]").textContent = `▶ NOW PLAYING — ${title || "Showreel"}`;
     player.hidden = false;
     inertTargets.forEach((el) => el && (el.inert = true));
@@ -296,9 +316,14 @@
     if (el.classList.contains("hero__media") && !FINE) return;
     el.addEventListener("click", () => openPlayer(reelURL, "Showreel"));
   });
+  const playFrom = (b) => openPlayer(b.dataset.youtube, b.dataset.title, b.dataset.full);
   $("[data-tl-track]").addEventListener("click", (e) => {
     const b = e.target.closest(".clip__btn");
-    if (b) openPlayer(b.dataset.youtube, b.dataset.title);
+    if (b) playFrom(b);
+  });
+  $("[data-reels]").addEventListener("click", (e) => {
+    const b = e.target.closest("button.phone");
+    if (b) playFrom(b);
   });
 
   /* =========================================================
@@ -356,50 +381,6 @@
     const t = tc(((performance.now() - t0) / 1000) * FPS);
     liveTCs.forEach((el) => (el.textContent = t));
   }, 1000 / FPS);
-
-  /* =========================================================
-     BEFORE / AFTER SLIDER
-     ========================================================= */
-  const ba = $("[data-ba]");
-  const handle = $("[data-ba-handle]");
-  const baState = { pos: 50 };
-  const setPos = (p) => {
-    baState.pos = clamp(p, 0, 100);
-    ba.style.setProperty("--pos", `${baState.pos}%`);
-    handle.setAttribute("aria-valuenow", Math.round(baState.pos));
-  };
-  const posFromEvent = (e) => {
-    const r = ba.getBoundingClientRect();
-    return ((e.clientX - r.left) / r.width) * 100;
-  };
-  let dragging = false;
-  ba.addEventListener("pointerdown", (e) => {
-    // touch: only the handle drags, so vertical swipes over the frame still scroll the page
-    if (e.pointerType !== "mouse" && !handle.contains(e.target)) return;
-    dragging = true;
-    ba.classList.add("is-dragging");
-    HAS_GSAP && gsap.killTweensOf(baState);
-    setPos(posFromEvent(e));
-  });
-  window.addEventListener("pointermove", (e) => { if (dragging) setPos(posFromEvent(e)); }, { passive: true });
-  const stopDrag = () => { dragging = false; ba.classList.remove("is-dragging"); };
-  window.addEventListener("pointerup", stopDrag);
-  window.addEventListener("pointercancel", stopDrag);
-  handle.addEventListener("keydown", (e) => {
-    const step = e.shiftKey ? 10 : 4;
-    if (e.key === "ArrowLeft") { setPos(baState.pos - step); e.preventDefault(); }
-    if (e.key === "ArrowRight") { setPos(baState.pos + step); e.preventDefault(); }
-    if (e.key === "Home") { setPos(0); e.preventDefault(); }
-    if (e.key === "End") { setPos(100); e.preventDefault(); }
-  });
-  // keep the two clips frame-synced
-  (() => {
-    const a = $("[data-ba-after]"), b = $("[data-ba-before]");
-    setInterval(() => {
-      if (a.paused || b.paused || !a.readyState || !b.readyState) return;
-      if (Math.abs(a.currentTime - b.currentTime) > 0.08) b.currentTime = a.currentTime;
-    }, 1000);
-  })();
 
   /* =========================================================
      TIMELINE — playhead, timecode, active clip
@@ -548,7 +529,7 @@
     timeline(mm);
     reelsCounter();
     reelsIntro(mm);
-    baHint();
+    aboutIntro();
     marquee();
     contactDistort();
 
@@ -759,18 +740,16 @@
     });
   }
 
-  /* ---------- before/after hint ---------- */
-  function baHint() {
+  /* ---------- about ---------- */
+  function aboutIntro() {
     if (REDUCE) return;
-    ScrollTrigger.create({
-      trigger: ba, start: "top 70%", once: true,
-      onEnter: () => {
-        if (dragging) return;
-        gsap.timeline()
-          .to(baState, { pos: 22, duration: 0.9, ease: "power3.inOut", onUpdate: () => setPos(baState.pos) })
-          .to(baState, { pos: 78, duration: 1.1, ease: "power3.inOut", onUpdate: () => setPos(baState.pos) })
-          .to(baState, { pos: 50, duration: 0.8, ease: "power3.inOut", onUpdate: () => setPos(baState.pos) });
-      },
+    gsap.from(".about__photo", {
+      clipPath: "inset(0 0 100% 0)", duration: 1.4, ease: "expo.inOut",
+      scrollTrigger: { trigger: ".about__grid", start: "top 80%", once: true },
+    });
+    gsap.from(".about__lines p, .about__meta > div", {
+      y: 40, opacity: 0, duration: 1, ease: "expo.out", stagger: 0.08,
+      scrollTrigger: { trigger: ".about__text", start: "top 85%", once: true },
     });
   }
 

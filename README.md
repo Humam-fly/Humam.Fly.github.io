@@ -8,7 +8,7 @@ GSAP (ScrollTrigger, SplitText) and Lenis load from jsDelivr.
 ## Update content
 
 Edit **`projects.js`**. It's the only file you need: projects, reels, VFX breakdown, services, socials and email.
-Put your video files in **`videos/`** (see `videos/README.md`). Any missing clip shows a styled "no signal" placeholder.
+Video files live in **`videos/`** (see `videos/README.md`). Any missing clip shows a styled "no signal" placeholder. The About photo is in `images/`.
 
 ## Files
 
