@@ -127,19 +127,18 @@ window.REELS = [
 ];
 
 /* ---------------------------------------------------------------------
-   SPEC LAB — one fictional brand ("Kavora"), six motion styles.
-   Spec work: made to show range, not a paid client project.
+   SPEC LAB — six fictional brands, six motion styles.
+   Spec work: made to show range, not paid client projects.
    --------------------------------------------------------------------- */
 window.SPEC = {
-  brand: "Kavora",
-  note: "Spec work · fictional brand · original graphics, music & SFX",
+  note: "Spec work · fictional brands · original graphics, music & SFX",
   items: [
-    { title: "Built in Silence",  style: "Kinetic Typography",   preview: "videos/preview/spec-kinetic.mp4", full: "videos/full/spec-kinetic.mp4" },
-    { title: "The Inbox",         style: "Paper Collage",        preview: "videos/preview/spec-collage.mp4", full: "videos/full/spec-collage.mp4" },
-    { title: "The Raise",         style: "Glass UI",             preview: "videos/preview/spec-glass.mp4",   full: "videos/full/spec-glass.mp4" },
-    { title: "Five Cities",       style: "Editorial · Data",     preview: "videos/preview/spec-map.mp4",     full: "videos/full/spec-map.mp4" },
-    { title: "On Autopilot",      style: "Product Launch · App UI", preview: "videos/preview/spec-launch.mp4", full: "videos/full/spec-launch.mp4" },
-    { title: "بصمت",              style: "Arabic Kinetic Type",  preview: "videos/preview/spec-arabic.mp4",  full: "videos/full/spec-arabic.mp4" },
+    { title: "Ember & Oat",           style: "Kinetic Type · Coffee",     preview: "videos/preview/spec-coffee.mp4",   full: "videos/full/spec-coffee.mp4" },
+    { title: "The Radio Years",       style: "Paper Collage · Museum",    preview: "videos/preview/spec-museum.mp4",   full: "videos/full/spec-museum.mp4" },
+    { title: "Tallyo",                style: "App UI · Fintech",          preview: "videos/preview/spec-app.mp4",      full: "videos/full/spec-app.mp4" },
+    { title: "Anatomy of a Reel",     style: "Editorial Infographic",     preview: "videos/preview/spec-anatomy.mp4",  full: "videos/full/spec-anatomy.mp4" },
+    { title: "Dunefall",              style: "Synthwave · Festival",      preview: "videos/preview/spec-festival.mp4", full: "videos/full/spec-festival.mp4" },
+    { title: "ظلّ المدينة",            style: "Arabic Title Sequence",     preview: "videos/preview/spec-drama.mp4",    full: "videos/full/spec-drama.mp4" },
   ],
 };
 
