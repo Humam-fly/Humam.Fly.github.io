@@ -89,6 +89,7 @@ window.SPEC = {
     { title: "Orbit",             style: "Product Launch · 3D UI",  preview: "videos/preview/spec-orbit.mp4" },
     { title: "Sketch → Motion",   style: "Storyboard to Animation", preview: "videos/preview/spec-sketch.mp4" },
     { title: "مِسك",               style: "Arabic Luxury Ad",        preview: "videos/preview/spec-oud.mp4" },
+    { title: "The Body Clock",    style: "Science Explainer · Hologram UI", preview: "videos/preview/spec-clock.mp4" },
   ],
 };
 
