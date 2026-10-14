@@ -3,8 +3,8 @@
    ---------------------------------------------------------------------
    This is the ONLY file you need to edit to update the site.
 
-   Every video on the site is a silent loop that plays on its own —
-   nothing opens or plays with sound when clicked.
+   Every video on the site is a silent loop that plays on its own.
+   The only sound is the full showreel, behind the "Watch full reel" button.
 
    Each item has:
      title     : name shown on the card
@@ -22,7 +22,7 @@ window.SITE = {
   showreel: {
     background: "videos/showreel-bg.mp4",           // front-page background (wide screens)
     backgroundVertical: "videos/showreel-bg-vertical.mp4", // front-page background (phones)
-    full: "videos/showreel.mp4",                    // "Watch full reel" (silent, plays on the site)
+    full: "videos/showreel.mp4",                    // "Watch full reel" (with music, plays on the site)
     fullVertical: "videos/showreel-vertical.mp4",
   },
 

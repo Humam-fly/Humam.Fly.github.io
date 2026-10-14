@@ -276,8 +276,11 @@
     frame.innerHTML = id
       ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
       title="${esc(title || "Video")}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`
-      : `<video class="player__video${/showreel\.mp4$/.test(file) ? " is-wide" : ""}" src="${esc(file)}" controls autoplay muted playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
+      : `<video class="player__video${/showreel\.mp4$/.test(file) ? " is-wide" : ""}" src="${esc(file)}" controls autoplay playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
     $("[data-player-title]").textContent = `▶ NOW PLAYING · ${title || "Showreel"}`;
+    // the full reel is the only video on the site with sound; if the browser blocks it, fall back to muted
+    const vid = frame.querySelector("video");
+    if (vid) vid.play().catch(() => { vid.muted = true; vid.play().catch(() => {}); });
     player.hidden = false;
     inertTargets.forEach((el) => el && (el.inert = true));
     lenis && lenis.stop();
