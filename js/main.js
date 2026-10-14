@@ -144,7 +144,11 @@
     if (baB) baB.dataset.src = BREAKDOWN.before || "";
     if (baA) baA.dataset.src = BREAKDOWN.after || "";
     if ($("[data-ba-title]")) $("[data-ba-title]").textContent = BREAKDOWN.title || "";
-    if ($("[data-ba-body]")) $("[data-ba-body]").textContent = BREAKDOWN.body || "";
+    const baBody = $("[data-ba-body]");
+    if (baBody) {
+      const paras = Array.isArray(BREAKDOWN.body) ? BREAKDOWN.body : [BREAKDOWN.body || ""];
+      baBody.innerHTML = paras.map((t) => `<span>${esc(t)}</span>`).join("");
+    }
 
     const photo = $("[data-about-photo]");
     if (photo && ABOUT.photo) {
@@ -273,7 +277,7 @@
       ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
       title="${esc(title || "Video")}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`
       : `<video class="player__video${/showreel\.mp4$/.test(file) ? " is-wide" : ""}" src="${esc(file)}" controls autoplay muted playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
-    $("[data-player-title]").textContent = `▶ NOW PLAYING — ${title || "Showreel"}`;
+    $("[data-player-title]").textContent = `▶ NOW PLAYING · ${title || "Showreel"}`;
     player.hidden = false;
     inertTargets.forEach((el) => el && (el.inert = true));
     lenis && lenis.stop();

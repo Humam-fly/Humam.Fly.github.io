@@ -38,10 +38,10 @@ window.SITE = {
    --------------------------------------------------------------------- */
 window.PROJECTS = [
   { title: "Lenin's First Statue",        category: "Explainer · Motion Graphics", page: "", preview: "videos/preview/lenin.mp4" },
-  { title: "Best Actress — Ramadan 2026", category: "Motion Graphics · Drama",     page: "", preview: "videos/preview/best-actress.mp4" },
+  { title: "Best Actress · Ramadan 2026", category: "Motion Graphics · Drama",     page: "", preview: "videos/preview/best-actress.mp4" },
   { title: "How Rich Are You?",           category: "Podcast Clip · Motion Graphics", page: "", preview: "videos/preview/podcast-clip.mp4" },
   { title: "Ramadan 2026",                category: "Drama Promo",                 page: "", preview: "videos/preview/ramadan-2026.mp4" },
-  { title: "Lenin — The Hook",            category: "Explainer · Opening Titles",  page: "", preview: "videos/preview/lenin-intro.mp4" },
+  { title: "Lenin · The Hook",            category: "Explainer · Opening Titles",  page: "", preview: "videos/preview/lenin-intro.mp4" },
   { title: "Most Despicable Character",   category: "Drama Hype Edit",             page: "", preview: "videos/preview/family-kitchen.mp4" },
   { title: "The Secret",                  category: "Drama Promo",                 page: "", preview: "videos/preview/the-secret.mp4" },
   { title: "Syrian Village Festival",     category: "Event Promo · News",          page: "Flash Platform", preview: "videos/preview/syrian-village.mp4" },
@@ -56,7 +56,12 @@ window.BREAKDOWN = {
   before: "videos/breakdown-raw.mp4",     // raw green-screen, filmed off my monitor while editing (2024)
   after:  "videos/breakdown-final.mp4",   // the finished edit, same moment
   title:  "Green screen. Back when it was rough.",
-  body:   "I made this in a small room I shared with ten people who didn't speak my language — looking for work, editing on an old laptop that could barely keep up. I made it work anyway. You don't just want someone who can edit your videos. You want someone who goes the extra mile, because that's how he got here.",
+  body: [
+    "2024. One small room, ten people, and not one of them spoke my language.",
+    "I spent my days looking for work and my nights editing on an old laptop that could barely play a video.",
+    "This is one of the videos that came out of that room.",
+    "Plenty of people can edit your videos. I'm the one who stays up until it's right.",
+  ],
 };
 
 /* ---------------------------------------------------------------------
@@ -93,10 +98,10 @@ window.SPEC = {
 window.ABOUT = {
   photo: "images/humam-stage.jpg",
   lines: [
-    "I'm Humam — a Syrian actor and video editor.",
-    "I started editing in 2015, back when YouTube wasn't a big deal yet, cutting my first videos in Windows Movie Maker.",
-    "Since then I've edited Arabic and English short-form: drama promos, news reels, talking heads and motion graphics.",
-    "Acting taught me how I cut — performance and timing first.",
+    "I'm Humam, a Syrian actor and video editor.",
+    "My first edit was in 2015, in Windows Movie Maker, back when YouTube was something only a few of us cared about.",
+    "I never stopped. Today I cut Arabic and English short form: drama promos, news, talking heads and motion graphics.",
+    "The actor in me makes every cut. I edit for the moment a performance lands, and I don't waste a single second getting there.",
   ],
   tools: ["Premiere Pro", "After Effects", "Audition", "DaVinci Resolve"],
 };
