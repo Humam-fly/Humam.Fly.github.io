@@ -81,6 +81,9 @@ window.SPEC = {
     { title: "Ember & Oat",       style: "Kinetic Type · Coffee",   preview: "videos/preview/spec-coffee.mp4" },
     { title: "Tallyo",            style: "App UI · Fintech",        preview: "videos/preview/spec-app.mp4" },
     { title: "Anatomy of a Reel", style: "Editorial Infographic",   preview: "videos/preview/spec-anatomy.mp4" },
+    { title: "Orbit",             style: "Product Launch · 3D UI",  preview: "videos/preview/spec-orbit.mp4" },
+    { title: "Sketch → Motion",   style: "Storyboard to Animation", preview: "videos/preview/spec-sketch.mp4" },
+    { title: "مِسك",               style: "Arabic Luxury Ad",        preview: "videos/preview/spec-oud.mp4" },
   ],
 };
 
