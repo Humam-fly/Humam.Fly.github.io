@@ -89,7 +89,7 @@
       const h = HUES[i % HUES.length];
       return `
       <li class="clip">
-        <button class="clip__btn" type="button" data-cursor="play" data-youtube="${esc(p.youtube || "")}" data-full="${esc(p.full || "")}" data-title="${esc(p.title)}" aria-label="Play ${esc(p.title)}">
+        <div class="clip__btn">
           <span class="clip__media media" style="display:block">
             <span class="ph" style="--h:${h}">
               <span class="ph__label mono">No signal</span>
@@ -102,22 +102,17 @@
               <span class="clip__meta mono"><b>${esc(p.category)}</b>${p.page ? `<span>for ${esc(p.page)}</span>` : ""}</span>
             </span>
           </span>
-        </button>
+        </div>
         ${waveSVG(i)}
       </li>`;
     }).join("");
   }
 
-  function renderReels(target = "[data-reels]", list = REELS, ui = () => "@humam.fly") {
+  function renderReels(target = "[data-reels]", list = REELS) {
     $(target).innerHTML = list.map((r, i) => {
       const h = HUES[(i + 2) % HUES.length];
-      const playable = r.full || r.youtube;
-      const tag = playable ? "button" : r.url ? "a" : "div";
-      const attrs = playable
-        ? `type="button" data-full="${esc(r.full || "")}" data-youtube="${esc(r.youtube || "")}" data-title="${esc(r.title)}" aria-label="Play ${esc(r.title)}"`
-        : r.url ? `href="${esc(r.url)}" target="_blank" rel="noopener" aria-label="${esc(r.title)} on Instagram"` : "";
       return `
-      <${tag} class="phone" ${attrs} data-cursor="play" data-cursor-label="${playable ? "PLAY" : "VIEW"}">
+      <div class="phone" aria-label="${esc(r.title)}">
         <span class="phone__notch"></span>
         <span class="phone__screen media" style="display:block">
           <span class="ph" style="--h:${h}">
@@ -126,8 +121,7 @@
           </span>
           <video class="lazy-video" data-src="${esc(r.preview)}" muted loop playsinline preload="none" aria-hidden="true"></video>
         </span>
-        <span class="phone__ui mono"><span>${esc(ui(r))}</span><span>9:16</span></span>
-      </${tag}>`;
+      </div>`;
     }).join("");
   }
 
@@ -144,7 +138,7 @@
   function renderStatic() {
     const heroVid = $(".hero video");
     const reel = SITE.showreel || {};
-    heroVid.dataset.src = (mq("(orientation: portrait)") && reel.vertical) || reel.preview || "";
+    heroVid.dataset.src = (mq("(orientation: portrait)") && reel.backgroundVertical) || reel.background || "";
 
     const baB = $("[data-ba-before]"), baA = $("[data-ba-after]");
     if (baB) baB.dataset.src = BREAKDOWN.before || "";
@@ -171,11 +165,6 @@
     const dev = $("[data-about-dev]");
     if (dev) dev.innerHTML = (ABOUT.inDevelopment || []).map((d) => `<li><b>${esc(d.title)}</b> <span class="mono">${esc(d.note || "")}</span></li>`).join("");
 
-    const stat = SITE.reelsStat || {};
-    const link = $("[data-stat-link]");
-    if (stat.url) link.href = stat.url;
-    $("[data-stat-label]").textContent = stat.label || "views";
-
     const email = $("[data-email]");
     email.href = `mailto:${SITE.email || ""}`;
     email.setAttribute("aria-label", `Email ${SITE.email || ""}`);
@@ -191,7 +180,7 @@
   renderWork();
   renderReels();
   const SPEC = window.SPEC || { items: [] };
-  renderReels("[data-spec]", SPEC.items, (r) => r.style);
+  renderReels("[data-spec]", SPEC.items);
   if (SPEC.note) $("[data-spec-note]").textContent = SPEC.note;
   renderMarquees();
   renderStatic();
@@ -283,14 +272,13 @@
     frame.innerHTML = id
       ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
       title="${esc(title || "Video")}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`
-      : `<video class="player__video${/showreel\.mp4$/.test(file) ? " is-wide" : ""}" src="${esc(file)}" controls autoplay playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
+      : `<video class="player__video${/showreel\.mp4$/.test(file) ? " is-wide" : ""}" src="${esc(file)}" controls autoplay muted playsinline preload="auto" aria-label="${esc(title || "Video")}"></video>`;
     $("[data-player-title]").textContent = `▶ NOW PLAYING — ${title || "Showreel"}`;
     player.hidden = false;
     inertTargets.forEach((el) => el && (el.inert = true));
     lenis && lenis.stop();
     html.style.overflow = "hidden";
     lazyVideos.forEach((v) => v.pause());
-    const hv = $(".hero video"); if (hv && !hv.muted) $("[data-sound]") && $("[data-sound]").click();
     if (HAS_GSAP && !REDUCE) {
       gsap.fromTo(player, { clipPath: "inset(50% 0 50% 0)" }, { clipPath: "inset(0% 0 0% 0)", duration: 0.7, ease: "expo.inOut" });
     }
@@ -325,39 +313,8 @@
   const REEL = SITE.showreel || {};
   const reelFile = () => (mq("(orientation: portrait)") && REEL.fullVertical) || REEL.full || "";
   $$("[data-play-reel]").forEach((el) => {
-    // On touch, the whole hero shouldn't hijack taps — only the button opens the reel
-    if (el.classList.contains("hero__media") && !FINE) return;
-    el.addEventListener("click", () => openPlayer(REEL.youtube || "", "Showreel 2026", REEL.youtube ? "" : reelFile()));
+    el.addEventListener("click", () => openPlayer("", "Showreel 2026", reelFile()));
   });
-
-  // Sound toggle: unmutes the background reel in place
-  const soundBtn = $("[data-sound]");
-  const heroVideo = $(".hero video");
-  if (soundBtn && heroVideo) {
-    soundBtn.addEventListener("click", () => {
-      const on = heroVideo.muted;
-      heroVideo.muted = !on;
-      if (on) {
-        loadVideo(heroVideo);
-        if (heroVideo.currentTime > 1 && heroVideo.dataset.restarted !== "1") { heroVideo.currentTime = 0; heroVideo.dataset.restarted = "1"; }
-        const pr = heroVideo.play(); if (pr && pr.catch) pr.catch(() => {});
-      }
-      soundBtn.setAttribute("aria-pressed", String(on));
-      soundBtn.setAttribute("aria-label", on ? "Turn sound off" : "Turn sound on");
-      $("[data-sound-label]", soundBtn).textContent = on ? "Sound on" : "Sound off";
-      soundBtn.classList.toggle("is-on", on);
-    });
-  }
-  const playFrom = (b) => openPlayer(b.dataset.youtube, b.dataset.title, b.dataset.full);
-  $("[data-tl-track]").addEventListener("click", (e) => {
-    const b = e.target.closest(".clip__btn");
-    if (b) playFrom(b);
-  });
-  $$("[data-reels], [data-spec]").forEach((row) => row.addEventListener("click", (e) => {
-    const b = e.target.closest("button.phone");
-    if (b) playFrom(b);
-  }));
-
   /* =========================================================
      CUSTOM CURSOR + MAGNETIC BUTTONS (fine pointers only)
      ========================================================= */
@@ -508,8 +465,8 @@
     html.classList.remove("is-loading");
     html.classList.add("is-ready");
     nativeTimeline();
-    const n = $("[data-counter]");
-    n.textContent = compact((SITE.reelsStat || {}).value || 0);
+
+
     return;
   }
 
@@ -781,6 +738,7 @@
   /* ---------- reels ---------- */
   function reelsCounter() {
     const el = $("[data-counter]");
+    if (!el) return;
     const target = (SITE.reelsStat || {}).value || 0;
     const fmt = new Intl.NumberFormat("en-US");
     if (REDUCE) { el.textContent = compact(target); return; }
