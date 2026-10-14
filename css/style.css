@@ -639,7 +639,7 @@ h1, h2, p { margin: 0; }
   .tl { --clip-w: 58vw; --head-w: 30px; }
   .about__grid { grid-template-columns: 1fr; }
   .ba-wrap { grid-template-columns: 1fr; }
-  .ba { max-width: 78vw; margin: 0 auto; }
+  .ba { width: 100%; max-width: 360px; margin: 0 auto; }
   .about__meta { grid-template-columns: 1fr; }
   .playhead { left: calc(var(--head-w) + 12%); }
   .reels__row {
