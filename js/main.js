@@ -601,9 +601,13 @@
     gsap.set(heroChars, { "--w": 62, "--g": 800 });
     if (REDUCE) return;
 
+    // on tall phone screens the reel sits in its own 16:9 frame above the name
+    const FRAMED = mq("(orientation: portrait) and (max-width: 900px)");
     const tlHero = gsap.timeline({ defaults: { ease: "expo.out" }, onComplete: () => heroReady && heroReady() });
     tlHero
-      .from(".hero__media", { scale: 1.25, duration: 2.2, ease: "power3.out" }, 0)
+      .from(".hero__media", FRAMED
+        ? { opacity: 0, y: 40, duration: 1.6, ease: "power3.out" }
+        : { scale: 1.25, duration: 2.2, ease: "power3.out" }, 0)
       .fromTo(heroChars, { yPercent: 110, opacity: 0, "--w": 125, "--g": 100 }, {
         yPercent: 0, opacity: 1, "--w": 62, "--g": 800,
         duration: 1.3, stagger: { each: 0.045, from: "start" },
@@ -618,7 +622,7 @@
       yPercent: -18, opacity: 0.2, ease: "none",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
     });
-    gsap.to(".hero__media", {
+    gsap.to(FRAMED ? ".hero__media video" : ".hero__media", {
       scale: 1.12, ease: "none",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
     });

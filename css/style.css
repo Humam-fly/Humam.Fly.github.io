@@ -627,6 +627,24 @@ h1, h2, p { margin: 0; }
   .contact__title span:last-child { padding-left: 0; }
 }
 
+/* phones held upright: the 16:9 reel gets its own frame, the name sits below it */
+@media (orientation: portrait) and (max-width: 900px) {
+  .hero {
+    height: auto; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center; gap: clamp(18px, 4svh, 56px);
+    padding: calc(var(--bar) + 60px) var(--gut) calc(var(--bar) + 24px);
+  }
+  .hero__media {
+    position: relative; inset: auto; flex: none; width: 100%;
+    aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 0 0 1px var(--line), 0 30px 60px rgba(0,0,0,.5);
+  }
+  .hero__shade { display: none; }
+  .hero__inner { display: contents; }
+  .hero__title { margin-bottom: 0; font-size: min(27vw, 13.5svh); }
+  .hero__kicker { position: absolute; top: calc(var(--bar) + 24px); left: var(--gut); right: var(--gut); margin: 0; z-index: 2; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   .grain { animation: none; }
