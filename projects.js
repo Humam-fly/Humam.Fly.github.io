@@ -69,7 +69,7 @@ window.REELS = [
   { title: "Samaher",        preview: "videos/preview/samaher.mp4" },
   { title: "Three Stars",    preview: "videos/preview/three-stars.mp4" },
   { title: "Hidden Charges", preview: "videos/preview/hidden-charges.mp4" },
-  { title: "Russian Smile",  preview: "videos/preview/russian-smile.mp4" },
+  { title: "World Cup 2026", preview: "videos/preview/world-cup.mp4" },
   { title: "Misr Mosque",    preview: "videos/preview/egypt-mosque.mp4" },
   { title: "Banned",         preview: "videos/preview/banned.mp4" },
 ];
