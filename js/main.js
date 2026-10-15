@@ -11,6 +11,7 @@
   const $ = (s, c = D) => c.querySelector(s);
   const $$ = (s, c = D) => Array.from(c.querySelectorAll(s));
   const mq = (q) => window.matchMedia(q).matches;
+  const HW = 78, HG = 700; // resting width / weight of the hero name
 
   const SITE = window.SITE || {};
   const PROJECTS = window.PROJECTS || [];
@@ -598,7 +599,7 @@
         heroChars.push(...s.chars);
       });
     }
-    gsap.set(heroChars, { "--w": 62, "--g": 800 });
+    gsap.set(heroChars, { "--w": HW, "--g": HG });
     if (REDUCE) return;
 
     // on tall phone screens the reel sits in its own 16:9 frame above the name
@@ -609,7 +610,7 @@
         ? { opacity: 0, y: 40, duration: 1.6, ease: "power3.out" }
         : { scale: 1.25, duration: 2.2, ease: "power3.out" }, 0)
       .fromTo(heroChars, { yPercent: 110, opacity: 0, "--w": 125, "--g": 100 }, {
-        yPercent: 0, opacity: 1, "--w": 62, "--g": 800,
+        yPercent: 0, opacity: 1, "--w": HW, "--g": HG,
         duration: 1.3, stagger: { each: 0.045, from: "start" },
       }, 0.05)
       .from([".hero__kicker", ".hero__ar", ".hero__tag", ".hero__foot .btn"], {
@@ -631,7 +632,7 @@
   function kineticHero() {
     if (REDUCE || !heroChars.length) return;
     const hero = $(".hero");
-    const state = heroChars.map(() => ({ w: 62, g: 800, y: 0, cx: 0, cy: 0 }));
+    const state = heroChars.map(() => ({ w: HW, g: HG, y: 0, cx: 0, cy: 0 }));
     let pointer = null;
     let tapTimer = 0;
     let running = false;
@@ -661,8 +662,8 @@
           p = clamp(1 - Math.hypot(dx, dy) / radius, 0, 1);
           p = p * p * (3 - 2 * p); // smoothstep
         }
-        const tw = 62 + p * 40;   // condensed → wider
-        const tg = 800 - p * 620; // heavy → hairline
+        const tw = HW + p * 30;   // → wider
+        const tg = HG - p * 520;  // → hairline
         const ty = -p * 6;
         s.w += (tw - s.w) * 0.14;
         s.g += (tg - s.g) * 0.14;
