@@ -20,10 +20,8 @@ window.SITE = {
   email: "hu.flayyes@gmail.com",
 
   showreel: {
-    background: "videos/showreel-bg.mp4",           // front-page background (wide screens)
-    backgroundVertical: "videos/showreel-bg-vertical.mp4", // front-page background (phones)
-    full: "videos/showreel.mp4",                    // "Watch full reel" (with music, plays on the site)
-    fullVertical: "videos/showreel-vertical.mp4",
+    background: "videos/showreel-bg.mp4",   // front-page background (silent, text-free, 16:9 on every screen)
+    full: "videos/showreel.mp4",            // "Watch full reel" (16:9 with music, plays on the site)
   },
 
   socials: [
