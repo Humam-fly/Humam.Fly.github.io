@@ -11,6 +11,8 @@
   const $ = (s, c = D) => c.querySelector(s);
   const $$ = (s, c = D) => Array.from(c.querySelectorAll(s));
   const mq = (q) => window.matchMedia(q).matches;
+  // first-frame image for a video: videos/preview/name.mp4 -> videos/posters/name.jpg
+  const posterOf = (src = "") => src ? src.replace(/^(.*\/)?videos\/(?:preview\/)?([^/]+)\.mp4$/, "$1videos/posters/$2.jpg") : "";
   const HW = 78, HG = 700; // resting width / weight of the hero name
 
   const SITE = window.SITE || {};
@@ -96,7 +98,7 @@
               <span class="ph__label mono">No signal</span>
               <span class="ph__title">${esc(p.title)}</span>
             </span>
-            <video class="lazy-video" data-src="${esc(p.preview)}" muted loop playsinline preload="none" aria-hidden="true"></video>
+            <video class="lazy-video" data-src="${esc(p.preview)}" poster="${esc(posterOf(p.preview))}" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="clip__label mono">C${pad(i + 1)} · ${tc(i * CLIP_SECONDS * FPS)}</span>
             <span class="clip__info">
               <span class="clip__title" role="heading" aria-level="3">${esc(p.title)}</span>
@@ -120,7 +122,7 @@
             <span class="ph__label mono">No signal</span>
             <span class="ph__title">${esc(r.title)}</span>
           </span>
-          <video class="lazy-video" data-src="${esc(r.preview)}" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <video class="lazy-video" data-src="${esc(r.preview)}" poster="${esc(posterOf(r.preview))}" muted loop playsinline preload="none" aria-hidden="true"></video>
         </span>
       </div>`;
     }).join("");
@@ -139,11 +141,13 @@
   function renderStatic() {
     const heroVid = $(".hero video");
     const reel = SITE.showreel || {};
-    heroVid.dataset.src = (mq("(orientation: portrait)") && reel.backgroundVertical) || reel.background || "";
+    // phones get a lighter copy of the loop; everyone sees its first frame straight away
+    heroVid.dataset.src = (mq("(max-width: 900px)") && reel.backgroundSmall) || reel.background || "";
+    heroVid.poster = posterOf(reel.background);
 
     const baB = $("[data-ba-before]"), baA = $("[data-ba-after]");
-    if (baB) baB.dataset.src = BREAKDOWN.before || "";
-    if (baA) baA.dataset.src = BREAKDOWN.after || "";
+    if (baB) { baB.dataset.src = BREAKDOWN.before || ""; baB.poster = posterOf(BREAKDOWN.before); }
+    if (baA) { baA.dataset.src = BREAKDOWN.after || ""; baA.poster = posterOf(BREAKDOWN.after); }
     if ($("[data-ba-title]")) $("[data-ba-title]").textContent = BREAKDOWN.title || "";
     const baBody = $("[data-ba-body]");
     if (baBody) {
@@ -219,7 +223,7 @@
   if ("IntersectionObserver" in window) {
     const loadIO = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e.isIntersecting) { loadVideo(e.target); loadIO.unobserve(e.target); } });
-    }, { rootMargin: "300px 300px" });
+    }, { rootMargin: "900px 1400px" });
     const playIO = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         const v = e.target;

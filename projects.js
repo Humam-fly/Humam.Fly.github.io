@@ -21,6 +21,7 @@ window.SITE = {
 
   showreel: {
     background: "videos/showreel-bg.mp4",   // front-page background (silent, text-free, 16:9 on every screen)
+    backgroundSmall: "videos/showreel-bg-sm.mp4", // lighter copy of the same loop for phones
     full: "videos/showreel.mp4",            // "Watch full reel" (16:9 with music, plays on the site)
   },
 

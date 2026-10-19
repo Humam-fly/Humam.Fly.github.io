@@ -174,6 +174,9 @@ h1, h2, p { margin: 0; }
 }
 .media.is-loaded video { opacity: 1; }
 .media.is-loaded .ph { opacity: 0; }
+/* a first-frame poster shows instantly while the clip itself loads */
+.media video[poster] { opacity: 1; }
+.media:has(video[poster]) .ph { opacity: 0; }
 
 .ph {
   --h: 12;
