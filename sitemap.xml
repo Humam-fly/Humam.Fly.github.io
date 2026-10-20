@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://humamflayyes.com/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
+    <image:image><image:loc>https://humamflayyes.com/images/humam-stage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/images/og-image.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/best-actress.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/lenin-intro.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/lenin.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/podcast-clip.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/showreel-bg.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-anatomy.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-app.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-clock.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-coffee.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-orbit.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-oud.jpg</image:loc></image:image>
+    <image:image><image:loc>https://humamflayyes.com/videos/posters/spec-sketch.jpg</image:loc></image:image>
   </url>
 </urlset>
