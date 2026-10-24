@@ -17,7 +17,7 @@
 
 window.SITE = {
   // ✉️  Swap for your work email when you make one
-  email: "hu.flayyes@gmail.com",
+  email: "humamfly.edit@gmail.com",
 
   showreel: {
     background: "videos/showreel-bg.mp4",   // front-page background (silent, text-free, 16:9 on every screen)
